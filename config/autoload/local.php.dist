@@ -13,4 +13,10 @@
  */
 
 return [
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=task_manager;host=db',
+        'username' => 'danilocolasso',
+        'password' => 'strongpassword',
+    ],
 ];

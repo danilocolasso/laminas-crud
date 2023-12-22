@@ -10,6 +10,8 @@ install:
 	@docker-compose exec laminas composer install
 	@echo "$(YELLOW)Setting folder permissions...$(RESET)"
 	@docker-compose exec laminas chmod 777 -R data/cache
+	@echo "$(YELLOW)Copying config files...$(RESET)"
+	@docker-compose exec laminas cp config/autoload/local.php.dist config/autoload/local.php
 	@echo "$(GREEN)All done!$(RESET)"
 
 start:
@@ -31,3 +33,21 @@ bash:
 restart:
 	@echo "$(YELLOW)Restarting container...$(RESET)"
 	@docker-compose restart
+
+test:
+	@echo "$(YELLOW)Running tests...$(RESET)"
+	@docker-compose exec laminas ./vendor/bin/phpunit
+
+dump-autoload:
+	@echo "$(YELLOW)Dumping autoload...$(RESET)"
+	@docker-compose exec laminas composer dump-autoload
+
+cache-clear:
+	@echo "$(YELLOW)Clearing cache...$(RESET)"
+	@docker-compose exec laminas rm -rf data/cache/*.php
+	@echo "$(GREEN)Cache cleared!$(RESET)"
+
+database-delete:
+	@echo "$(YELLOW)Deleting database...$(RESET)"
+	@rm -rdf data/database/data/*
+	@echo "$(GREEN)Database deleted!$(RESET)"

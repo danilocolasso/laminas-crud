@@ -7,6 +7,7 @@ namespace ApplicationTest\Controller;
 use Application\Controller\IndexController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Task\Controller\TaskController;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
@@ -30,9 +31,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('application');
-        $this->assertControllerName(IndexController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('IndexController');
+        $this->assertModuleName('task');
+        $this->assertControllerName(TaskController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('TaskController');
         $this->assertMatchedRouteName('home');
     }
 

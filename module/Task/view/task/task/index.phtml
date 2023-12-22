@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+$title = 'Tasks';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('task', ['action' => 'add']) ?>">Add new task</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($tasks as $task) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($task->title) ?></td>
+            <td><?= $this->escapeHtml($task->description) ?></td>
+            <td>
+                <a href="<?= $this->url('task', ['action' => 'edit', 'id' => $task->id]) ?>">Edit</a>
+                <a href="<?= $this->url('task', ['action' => 'delete', 'id' => $task->id]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

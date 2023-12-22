@@ -14,16 +14,24 @@
         "laminas/laminas-component-installer": "^3.2",
         "laminas/laminas-development-mode": "^3.10",
         "laminas/laminas-skeleton-installer": "^1.2",
-        "laminas/laminas-mvc": "^3.6.0"
-    },
+        "laminas/laminas-mvc": "^3.6.0",
+        "laminas/laminas-test": "^4.10",
+        "laminas/laminas-db": "^2.18",
+        "robmorgan/phinx": "^0.15.5",
+        "laminas/laminas-form": "^3.17",
+        "laminas/laminas-i18n": "^2.24",
+        "phpspec/prophecy-phpunit": "^2.1"
+},
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "Task\\": "module/Task/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "module/Application/test/"
+            "ApplicationTest\\": "module/Application/test/",
+            "TaskTest\\": "module/Task/test/"
         }
     },
     "scripts": {
@@ -63,5 +71,8 @@
             "laminas/laminas-component-installer": true,
             "laminas/laminas-skeleton-installer": true
         }
+    },
+    "require-dev": {
+        "phpspec/prophecy": "^1.18"
     }
 }

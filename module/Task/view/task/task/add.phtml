@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+$title = 'Add new task';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+/** @var Laminas\Form\Form $form */
+$form->setAttribute('action', $this->url('task', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('title'));
+echo $this->formRow($form->get('description'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

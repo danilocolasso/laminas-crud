@@ -1,4 +1,8 @@
-FROM php:8.3-apache
+FROM php:8.2-apache
+
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
 
 LABEL maintainer="getlaminas.org" \
     org.label-schema.docker.dockerfile="/Dockerfile" \
@@ -7,7 +11,7 @@ LABEL maintainer="getlaminas.org" \
     org.label-schema.vcs-url="https://github.com/laminas/laminas-mvc-skeleton"
 
 ## Update package information
-RUN apt-get update
+RUN ``apt-get`` update
 
 ## Configure Apache
 RUN a2enmod rewrite \
@@ -23,7 +27,7 @@ RUN curl -sS https://getcomposer.org/installer \
 ###
 
 ## Install zip libraries and extension
-RUN apt-get install --yes git zlib1g-dev libzip-dev \
+RUN ``apt-get`` install --yes git zlib1g-dev libzip-dev \
     && docker-php-ext-install zip
 
 ## Install intl library and extension
@@ -76,3 +80,11 @@ RUN docker-php-ext-install pdo_mysql
 
 
 WORKDIR /var/www
+
+# Create system user to run Composer and other commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Set the user
+USER $user

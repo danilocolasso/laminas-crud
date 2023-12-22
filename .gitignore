@@ -3,6 +3,9 @@ vendor/
 config/development.config.php
 data/cache/*
 !data/cache/.gitkeep
+data/database/*
+!data/database/.gitkeep
+!data/database/data/.gitkeep
 phpunit.xml
 composer.lock
 .phpunit.result.cache
