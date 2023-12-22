@@ -12,6 +12,8 @@ install:
 	@docker-compose exec laminas chmod 777 -R data/cache
 	@echo "$(YELLOW)Copying config files...$(RESET)"
 	@docker-compose exec laminas cp config/autoload/local.php.dist config/autoload/local.php
+	@echo "$(YELLOW)Waiting for database setup...$(RESET)"
+	@sleep 15
 	@echo "$(GREEN)All done!$(RESET)"
 
 start:
