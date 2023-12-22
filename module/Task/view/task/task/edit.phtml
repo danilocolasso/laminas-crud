@@ -6,40 +6,62 @@
 $title = 'Edit task';
 $this->headTitle($title);
 ?>
-<h1><?= $this->escapeHtml($title) ?></h1>
-<?php
-$task = $form->get('title');
-$task->setAttribute('class', 'form-control');
-$task->setAttribute('placeholder', 'Task title');
+<h1 class="text-2xl font-medium text-center md:text-start">
+    <?= $this->escapeHtml($title) ?>
+</h1>
 
-$description = $form->get('description');
-$description->setAttribute('class', 'form-control');
-$description->setAttribute('placeholder', 'Description');
+<div class="flex flex-col gap-4">
+    <?php
+    $fieldClasses = 'rounded-sm font-normal';
+    $labelClasses = 'flex flex-col gap-1 font-medium';
 
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+    /** @var Laminas\Form\Form $form */
+    $form
+        ->setAttribute('class', 'flex flex-col gap-2')
+        ->setAttribute('action', $this->url('task', ['action' => 'add']));
 
-$form->setAttribute('action', $this->url('task', [
-    'action' => 'edit',
-    'id' => $id,
-]));
-$form->prepare();
+    $form->get('title')
+        ->setAttribute('class', $fieldClasses)
+        ->setAttribute('placeholder', 'Task title')
+        ->setOptions(['label_attributes' => ['class' => $labelClasses]]);
 
-echo $this->form()->openTag($form);
-?>
-    <div class="form-group">
-        <?= $this->formLabel($task) ?>
-        <?= $this->formElement($task) ?>
-        <?= $this->formElementErrors()->render($task, ['class' => 'help-block']) ?>
+    $form->get('description')
+        ->setAttribute('class', $fieldClasses)
+        ->setAttribute('placeholder', 'Task description')
+        ->setOptions(['label_attributes' => ['class' => $labelClasses]]);
+
+    $form->get('submit')
+        ->setAttribute(
+            'class',
+            'text-white rounded-md bg-blue-500 hover:bg-blue-500/80 px-4
+                py-2 border border-transparent hover:border-blue-800 text-center cursor-pointer'
+        );
+
+    $form->setAttribute('action', $this->url('task', [
+        'action' => 'edit',
+        'id' => $id,
+    ]));
+
+    $form->prepare();
+
+    $form->prepare();
+
+    echo $this->form()->openTag($form);
+    echo $this->formHidden($form->get('id'));
+    echo $this->formRow($form->get('title'));
+    echo $this->formRow($form->get('description'));
+    ?>
+
+    <div class="flex flex-col-reverse md:flex-row md:flex-row md:justify-end gap-2">
+        <a
+                class="text-center rounded-md px-4 py-2 text-md bg-gray-200 border border-transparent hover:border-gray-400 cursor-pointer"
+                href="<?= $this->url('task', ['action' => 'index']) ?>"
+        >
+            Cancel
+        </a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
     </div>
 
-    <div class="form-group">
-        <?= $this->formLabel($description) ?>
-        <?= $this->formElement($description) ?>
-        <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
-    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>
 
-<?php
-echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('id'));
-echo $this->form()->closeTag();

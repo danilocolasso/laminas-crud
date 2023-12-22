@@ -13,12 +13,12 @@ use Task\Enum\StatusEnum;
 
 class Task implements InputFilterAwareInterface
 {
-    public ?int $id;
-    public string $title;
-    public ?string $description;
-    public StatusEnum $status;
-    public \DateTime $createdAt;
-    public \DateTime $updatedAt;
+    public ?int $id = null;
+    public ?string $title = null;
+    public ?string $description = null;
+    public ?StatusEnum $status = null;
+    public ?\DateTime $createdAt = null;
+    public ?\DateTime $updatedAt = null;
 
     private ?InputFilter $inputFilter = null;
 
@@ -91,7 +91,7 @@ class Task implements InputFilterAwareInterface
 
         $inputFilter->add([
             'name' => 'description',
-            'required' => true,
+            'required' => false,
             'filters' => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],

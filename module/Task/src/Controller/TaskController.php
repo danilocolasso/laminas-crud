@@ -26,15 +26,29 @@ class TaskController extends AbstractActionController
         ]);
     }
 
-    public function viewAction(): ViewModel
+    public function viewAction(): Response|array
     {
-        return new ViewModel();
+        $id = (int) $this->params()->fromRoute('id');
+
+        if (!$id) {
+            return $this->redirect()->toRoute('task');
+        }
+
+        try {
+            $task = $this->table->get($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('task', ['action' => 'index']);
+        }
+
+        return [
+            'id' => $id,
+            'task' => $task,
+        ];
     }
 
     public function addAction(): Response|array
     {
         $form = new TaskForm();
-        $form->get('submit')->setValue('Add');
 
         $request = $this->getRequest();
 
@@ -72,7 +86,6 @@ class TaskController extends AbstractActionController
 
         $form = new TaskForm();
         $form->bind($task);
-        $form->get('submit')->setAttribute('value', 'Edit');
 
         $request = $this->getRequest();
         $viewData = ['id' => $id, 'form' => $form];

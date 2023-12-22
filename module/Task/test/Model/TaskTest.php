@@ -7,7 +7,7 @@ use Task\Model\Task;
 
 class TaskTest extends TestCase
 {
-    public function testInitialTaskValuesAreNull(): void
+    public function testInitialTaskShouldBeNull(): void
     {
         $task = new Task();
 
@@ -16,7 +16,7 @@ class TaskTest extends TestCase
         $this->assertNull($task->description, '"description" should be null by default');
     }
 
-    public function testExchangeArraySetsPropertiesCorrectly(): void
+    public function testExchangeArrayShouldSetProperties(): void
     {
         $task = new Task();
         $data  = [
@@ -46,7 +46,7 @@ class TaskTest extends TestCase
         );
     }
 
-    public function testExchangeArraySetsPropertiesToNullIfKeysAreNotPresent(): void
+    public function testExchangeArrayShouldSetPropertiesToNullIfKeysAreNotPresent(): void
     {
         $task = new Task();
 
@@ -62,7 +62,7 @@ class TaskTest extends TestCase
         $this->assertNull($task->description, '"description" should default to null');
     }
 
-    public function testGetArrayCopyReturnsAnArrayWithPropertyValues(): void
+    public function testGetArrayCopyShouldReturnAnArrayWithValues(): void
     {
         $task = new Task();
         $data  = [
@@ -79,7 +79,7 @@ class TaskTest extends TestCase
         $this->assertSame($data['description'], $copyArray['description'], '"description" was not set correctly');
     }
 
-    public function testInputFiltersAreSetCorrectly(): void
+    public function testInputFiltersShouldBeSett(): void
     {
         $task = new Task();
 

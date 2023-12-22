@@ -4,10 +4,10 @@
  */
 ?>
 <?= $this->doctype() ?>
-<html lang="en">
+<html lang="en" class="w-full h-full">
     <head>
         <meta charset="utf-8">
-        <?= $this->headTitle('Laminas MVC Skeleton')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Task Manager')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -16,59 +16,32 @@
 
         <!-- Le styles -->
         <?= $this->headLink([
-                                'rel' => 'shortcut icon',
-                                'type' => 'image/vnd.microsoft.icon',
-                                'href' => $this->basePath() . '/img/favicon.ico'
-                            ])
-            ->prependStylesheet($this->basePath('css/style.css'))
-            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+                'rel' => 'shortcut icon',
+                'type' => 'image/vnd.microsoft.icon',
+                'href' => $this->basePath() . '/img/favicon.ico'
+            ])
         ?>
+
+        <?= $this->inlineScript()
+            ->prependFile('https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp') ?>
         <!-- Scripts -->
         <?= $this->headScript() ?>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-md navbar-dark mb-4" role="navigation">
-            <div class="container">
-                <a class="navbar-brand" href="<?= $this->url('home') ?>">
-                    <img src="<?= $this->basePath('img/laminas-logo.svg') ?>" alt="Laminas">
-                    <span class="navbar-text text-light">MVC Skeleton</span>
-                </a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="<?= $this->url('home') ?>"
-                            >Home
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <body class="w-full min-h-full text-gray-800">
+        <nav class="flex justify-center md:justify-start bg-blue-500 px-8 py-4" role="navigation">
+            <a class="flex flex-col md:flex-row items-center gap-2 md:gap-4" href="<?= $this->url('home') ?>">
+                <img class="h-16" src="<?= $this->basePath('img/laminas-logo.svg') ?>" alt="Laminas">
+                <span class="text-white text-sm">Task Manager</span>
+            </a>
         </nav>
-        <div class="container">
-            <?= $this->content ?>
-            <hr>
-            <footer>
-                <p>
-                    &copy; <?= date('Y') ?>
-                    <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
-                </p>
+        <div class="flex flex-col justify-between bg-gray-100 min-h-[calc(100vh-7.75rem)]">
+            <div class="flex flex-col gap-8 flex-grow bg-white border-gray-100 rounded-md shadow-sm p-4 m-4">
+                <?= $this->content ?>
+            </div>
+            <footer class="flex items-center justify-center md:justify-end p-4 gap-1">
+                <span class="cursor-default">Made with ♡ by</span>
+                <a class="text-blue-500 hover:text-blue-800" href="https://www.linkedin.com/in/danilocolasso/">Danilo Colasso</a>
             </footer>
         </div>
-        <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js')) ?>
     </body>
 </html>
