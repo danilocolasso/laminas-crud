@@ -62,6 +62,12 @@ http://localhost:8080/
 
 For "make" command details, refer to the `makefile` in the application root.
 
+### TO DO
+- Authentication
+- Create more tests for failure cases
+- Add pagination
+- Add email notification
+
 <br />
 <h4 align="center">
     Made with ♡ by <a href="https://www.linkedin.com/in/danilocolasso/" target="_blank">Danilo Colasso</a>
