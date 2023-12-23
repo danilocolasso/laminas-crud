@@ -90,6 +90,11 @@ class Task implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
+            'name' => 'status',
+            'required' => false,
+        ]);
+
+        $inputFilter->add([
             'name' => 'description',
             'required' => false,
             'filters' => [

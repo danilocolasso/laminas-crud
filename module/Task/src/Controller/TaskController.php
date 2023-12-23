@@ -70,6 +70,26 @@ class TaskController extends AbstractActionController
         return $this->redirect()->toRoute('task');
     }
 
+    public function toggleStatusAction(): Response|array
+    {
+        $id = (int) $this->params()->fromRoute('id');
+
+        if (!$id) {
+            return $this->redirect()->toRoute('task');
+        }
+
+        try {
+            $task = $this->table->get($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('task', ['action' => 'index']);
+        }
+
+        $task->status = $task->status->toggle();
+        $this->table->save($task);
+
+        return $this->redirect()->toRoute('task');
+    }
+
     public function editAction(): Response|array
     {
         $id = (int) $this->params()->fromRoute('id');

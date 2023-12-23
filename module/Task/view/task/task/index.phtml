@@ -21,17 +21,26 @@ $this->headTitle($title);
     </div>
 
     <div class="flex flex-col">
-        <div class="grid grid-cols-4 font-medium uppercase p-4 border-b border-gray-300">
+        <div class="grid grid-cols-4 md:grid-cols-[10%_30%_40%_20%] font-medium uppercase p-4 border-b border-gray-300">
+            <span></span>
             <span>Title</span>
             <span>Description</span>
-            <span>Status</span>
             <span></span>
         </div>
         <?php foreach ($tasks as $task) : ?>
-            <div class="grid grid-cols-4 items-center px-4 py-2 text-gray-600 rounded-sm hover:bg-blue-50 border-b border-gray-150 last:border-b-0">
+            <div class="grid grid-cols-4 md:grid-cols-[10%_30%_40%_20%] items-center px-4 py-2 text-gray-600 rounded-sm hover:bg-blue-50 border-b border-gray-150 last:border-b-0">
+                <div>
+                    <a class="inline-flex self-center" href="<?= $this->url('task', ['action' => 'toggle-status', 'id' => $task->id]) ?>">
+                        <input type="hidden" name="status" value="<?= $task->status->toggle()->value ?>" />
+                        <input
+                            type="checkbox"
+                            class="rounded-sm pointer-events-none"
+                            <?= $task->status === \Task\Enum\StatusEnum::COMPLETED ? 'checked' : '' ?>
+                        />
+                    </a>
+                </div>
                 <span><?= $this->escapeHtml($task->title) ?></span>
                 <span><?= $this->escapeHtml($task->description) ?></span>
-                <span class="capitalize"><?= $this->escapeHtml($task->status->value) ?></span>
                 <div class="flex flex-col md:flex-row gap-1 md:gap-2">
                     <a
                             class="text-center rounded-md px-2 py-0.5 md:px-4 md:py-1 text-sm md:text-md bg-gray-200 border border-transparent hover:border-gray-400"
