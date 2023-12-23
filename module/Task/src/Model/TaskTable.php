@@ -52,6 +52,7 @@ class TaskTable
             throw new RuntimeException(sprintf('Cannot update task with identifier %d; does not exist', $id));
         }
 
+        unset($data['created_at']);
         $this->tableGateway->update($data, ['id' => $id]);
     }
 
