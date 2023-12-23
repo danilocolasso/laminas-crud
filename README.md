@@ -1,6 +1,6 @@
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)](https://www.php.net/releases/8.2/en.php)
-[![Laravel](https://img.shields.io/badge/Laminas-10-013755?logo=zend&logoColor=white)](https://laravel.com/docs/10.x)
+[![Laminas MVC](https://img.shields.io/badge/Laminas_MVC-3.x-013755?logo=zend&logoColor=white)](https://docs.laminas.dev/laminas-mvc/)
 
 # Laminas CRUD
 A simple CRUD test case using Laminas framework.
